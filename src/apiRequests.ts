@@ -12,7 +12,7 @@ export type CartItemType = {
     count: number;
   };
   image: string;
-  amount?: number;
+  amount: number;
 };
 
 export async function getProducts(): Promise<CartItemType[]> {
@@ -22,6 +22,6 @@ export async function getProducts(): Promise<CartItemType[]> {
     return await response.json();
   } catch (err) {
     // Use Mock data if the remote server is not working
-    return mockProduct();
+    return mockProduct().map((item) => ({ ...item, amount: 0 }));
   }
 }
